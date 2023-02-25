@@ -12,15 +12,15 @@ app.set('view engine', 'hbs')
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.get('/', (req, res) => {
-  res.send('hello world')
-})
-app.get('/users/login', (req, res) => {
   return Todo.findAll({
     raw: true,
     nest: true
   })
     .then((todos) => { return res.render('index', { todos: todos }) })
     .catch((error) => { return res.status(422).json(error) })
+})
+app.get('/users/login', (req, res) => {
+  res.render('login')
 })
 
 app.get('/todos/:id', (req, res) => {
